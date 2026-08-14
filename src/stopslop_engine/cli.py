@@ -6,7 +6,10 @@ import sys
 from pathlib import Path
 from typing import List, Optional
 
-from .adapter import AnalysisError, analyse_text
+try:
+    from .adapter import AnalysisError, analyse_text
+except ImportError:
+    from stopslop_engine.adapter import AnalysisError, analyse_text
 
 
 def bundled_root() -> Path:
