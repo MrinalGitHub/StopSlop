@@ -41,14 +41,29 @@ The Version 2.0.2 test DMG is available from the [pre-release GitHub page](https
 
 ## Installation
 
-The intended normal-user installation flow is:
+The free installation flow is:
 
-1. Download the latest **StopSlop `.dmg`** from the [GitHub Releases page](https://github.com/MrinalGitHub/StopSlop/releases).
-2. Open the DMG and drag StopSlop into the Applications folder.
-3. Launch StopSlop from Applications.
-4. Paste prose and choose **Analyse writing**.
+1. Download the **StopSlop 2.0.2 Apple Silicon DMG** from the [GitHub pre-release page](https://github.com/MrinalGitHub/StopSlop/releases/tag/v2.0.2).
+2. Download the matching `.sha256` file and verify the DMG before opening it:
 
-The Version 2.0.2 release includes richer explainable signals, a visible 8,000-word capacity meter, corrected local analysis execution, the white-and-orange interface, supported macOS architecture, checksum, release notes, and installation guidance. Developers can reproduce the build locally by following [`docs/release.md`](docs/release.md).
+   ```bash
+   shasum -a 256 StopSlop_2.0.2_aarch64.dmg
+   cat StopSlop_2.0.2_aarch64.dmg.sha256
+   ```
+
+   The two SHA-256 values must match exactly.
+3. Open the DMG and drag StopSlop into the Applications folder.
+4. On the first launch, **Control-click or right-click StopSlop.app and choose Open**, then confirm Open. This is required because the free build is not signed or notarized by Apple.
+5. If macOS still blocks the app after you have verified the checksum and trust the downloaded source, remove the quarantine attribute and launch it:
+
+   ```bash
+   xattr -dr com.apple.quarantine /Applications/StopSlop.app
+   open /Applications/StopSlop.app
+   ```
+
+6. Paste prose and choose **Analyse writing**.
+
+This free release includes richer explainable signals, a visible 8,000-word capacity meter, corrected local analysis execution, the white-and-orange interface, native icon, and Apple Silicon support. It does not require an Apple Developer membership, cloud account, hosted API, database, or internet connection for core analysis. Developers can reproduce the build locally by following [`docs/release.md`](docs/release.md).
 
 The product preview above illustrates the intended StopSlop experience: local, private writing review with a clear score, metrics, findings, and revision-oriented workflow.
 
@@ -60,6 +75,10 @@ The product preview above illustrates the intended StopSlop experience: local, p
 4. The bundled detector runs locally and returns a normalized result.
 5. The interface presents the score, severity band, metrics, and findings in plain language.
 6. The user can clear the draft and result at any time.
+
+## Free distribution and security note
+
+StopSlop is distributed as an unsigned, open-source Apple Silicon test build so that the project can remain free without the Apple Developer Program fee. macOS Gatekeeper may warn or block the first launch. Only bypass the warning after downloading from the official GitHub release, verifying the published SHA-256 checksum, and deciding that you trust the source. A future Developer ID-signed and notarized release would remove this manual step but is not required for local development.
 
 ## Privacy model
 
