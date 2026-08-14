@@ -13,6 +13,8 @@
   <img src="assets/stopslop-product-preview.gif" alt="Animated StopSlop product preview" width="720" />
 </p>
 
+> **Release status:** Version 2.0.2 is an Apple Silicon test build and is currently unsigned. A normal public macOS release requires Developer ID signing and Apple notarization; until that is completed, macOS Gatekeeper may reject the downloaded application.
+
 **StopSlop** is a privacy-first writing-pattern review application for macOS. It runs locally on the user’s Mac, analyzes prose without sending text to a server, and presents a score, severity band, metrics, and named writing-pattern findings.
 
 StopSlop builds on [Sloptrim](https://github.com/seyedehsanhadi/sloptrim), a local detector for AI-writing patterns. StopSlop adds a polished desktop interface, local application packaging, accessibility-minded result presentation, and a downloadable macOS DMG.
@@ -21,11 +23,11 @@ StopSlop builds on [Sloptrim](https://github.com/seyedehsanhadi/sloptrim), a loc
 
 ## Product status
 
-**Version 2.0.2 is the enriched end-user release target:** a ready-made Apple Silicon macOS `.dmg` published under GitHub Releases. The repository currently contains the product specification, desktop implementation, local analyzer sidecar build path, and DMG packaging configuration. The release artifact will require no cloud account, hosted API, database, or network connection for core analysis.
+**Version 2.0.2 is the enriched Apple Silicon test build:** a ready-made Apple Silicon macOS `.dmg` published under GitHub Releases. The repository currently contains the product specification, desktop implementation, local analyzer sidecar build path, and DMG packaging configuration. The release artifact will require no cloud account, hosted API, database, or network connection for core analysis.
 
-The Version 2.0.2 DMG is available from the [latest GitHub Release](https://github.com/MrinalGitHub/StopSlop/releases/tag/v2.0.2).
+The Version 2.0.2 test DMG is available from the [pre-release GitHub page](https://github.com/MrinalGitHub/StopSlop/releases/tag/v2.0.2).
 
-| Property | Version 2.0.2 target |
+| Property | Version 2.0.2 test build |
 |---|---|
 | Product type | Native-feeling local macOS desktop application |
 | Distribution | Downloadable `.dmg` from GitHub Releases |

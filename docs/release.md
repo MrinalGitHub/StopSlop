@@ -43,3 +43,19 @@ Each release should include:
 - Known limitations.
 - Upstream attribution and licence information.
 - The exact source commit and supported macOS architecture.
+
+## Verified public-distribution path
+
+The repository includes `scripts/build_signed_dmg.sh` for the public release path. It intentionally refuses to produce a release artifact unless a valid Developer ID Application identity and a configured `xcrun notarytool` keychain profile are available.
+
+On the release Mac, configure the identity and notary profile without placing secrets in Git:
+
+```bash
+export APPLE_SIGNING_IDENTITY='Developer ID Application: Your Name (TEAMID)'
+export APPLE_NOTARY_PROFILE='stopslop-notary'
+./scripts/build_signed_dmg.sh
+```
+
+The script builds the `.app`, signs the bundled analyzer before signing the app, verifies the signature, creates the DMG, submits it to Apple for notarization, staples the ticket, and verifies the final disk image. The release reviewer must then copy the app from the DMG into a clean Applications folder and confirm that `open`, `spctl --assess --type execute`, and a representative local analysis all succeed.
+
+A DMG built with ad-hoc or unsigned signatures is an internal test artifact only. It must not be described as a normal end-user release because macOS Gatekeeper may reject the app or its bundled analyzer after download.
