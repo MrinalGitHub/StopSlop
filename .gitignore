@@ -1,0 +1,39 @@
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+.coverage
+htmlcov/
+
+# Rust and Tauri
+**/target/
+**/node_modules/
+app/src-tauri/gen/
+app/src-tauri/target/
+
+# Local builds and release artifacts
+build/
+dist/
+release/
+*.dmg
+*.app
+*.zip
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.p12
+*.p8
+*.cer
+*.mobileprovision
+
+# Local test data
+.tmp/
+tmp/
+*.local.json

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "StopSlop",
+  "version": "0.1.0",
+  "identifier": "ai.kritrim.stopslop",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://127.0.0.1:5173",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "StopSlop — Local writing-pattern review",
+        "width": 1180,
+        "height": 780,
+        "minWidth": 760,
+        "minHeight": 620,
+        "resizable": true,
+        "fullscreen": false
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: data:; script-src 'self'"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["dmg"],
+    "shortDescription": "Local writing-pattern review",
+    "longDescription": "StopSlop reviews writing patterns locally on your Mac. It does not identify authorship or prove AI use.",
+    "category": "Utility",
+    "copyright": "Copyright 2026 Kritrim-ai"
+  }
+}

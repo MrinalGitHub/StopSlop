@@ -1,0 +1,8 @@
+StopSlop
+
+StopSlop is an independent derivative project by Kritrim-ai. It adds a local macOS user interface, adapter, packaging, documentation, and release configuration around the upstream Sloptrim detector.
+
+Detection engine credit:
+StopSlop builds on Sloptrim by Seyed Ehsan Hadi, licensed under Apache License 2.0. The upstream author does not endorse StopSlop.
+
+The applicable upstream licence, NOTICE, CITATION.cff, and other attribution materials are preserved under vendor/sloptrim and summarized in THIRD_PARTY_NOTICES.md.

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0f172a" />
+    <title>StopSlop — Local writing-pattern review</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand-lockup">
+          <img src="../../assets/kritrim-k-logo-transparent.png" alt="Kritrim-ai" class="brand-mark" />
+          <div>
+            <p class="eyebrow">Kritrim-ai</p>
+            <h1>StopSlop</h1>
+          </div>
+        </div>
+        <div class="privacy-pill"><span class="status-dot"></span>Local analysis</div>
+      </header>
+
+      <main class="content-grid">
+        <section class="editor-card card">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Review your draft</p>
+              <h2>Paste prose to review</h2>
+            </div>
+            <span id="word-count" class="muted">0 words</span>
+          </div>
+
+          <textarea id="prose" aria-label="Prose to review" placeholder="Paste a draft, article, proposal, or email here..."></textarea>
+
+          <div class="editor-footer">
+            <p class="privacy-note">Your prose stays on this Mac during analysis.</p>
+            <p id="input-hint" class="muted">At least 20 characters</p>
+          </div>
+
+          <div class="action-row">
+            <button id="analyse" class="primary-button" disabled>Analyse writing</button>
+            <button id="clear" class="secondary-button">Clear</button>
+          </div>
+          <p id="error" class="error-message" role="alert" hidden></p>
+        </section>
+
+        <section id="empty-state" class="empty-card card">
+          <div class="empty-icon">S</div>
+          <h2>Your review will appear here</h2>
+          <p>StopSlop reports writing patterns that may read as formulaic or machine-like. It does not identify an author or prove AI use.</p>
+        </section>
+
+        <section id="result-state" class="result-grid" hidden>
+          <article class="score-card card">
+            <p class="eyebrow">Writing-pattern score</p>
+            <div id="score" class="score-value">—</div>
+            <p id="band" class="score-band">Waiting for analysis</p>
+            <p id="metrics" class="muted">0 words analysed</p>
+          </article>
+          <article class="findings-card card">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Explainable signals</p>
+                <h2>Findings</h2>
+              </div>
+              <span id="finding-count" class="muted">0</span>
+            </div>
+            <p id="summary" class="summary"></p>
+            <div id="findings" class="findings-list"></div>
+          </article>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <span>StopSlop by Kritrim-ai</span>
+        <nav aria-label="Application information">
+          <button data-info="privacy">Privacy</button>
+          <button data-info="credits">Credits</button>
+          <button data-info="limitations">Limitations</button>
+        </nav>
+      </footer>
+    </div>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
