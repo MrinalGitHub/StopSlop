@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite ui --host 127.0.0.1",
-    "build": "vite build ui --outDir dist",
+    "build": "vite build ui --outDir ../dist",
     "tauri": "tauri"
   },
   "dependencies": {
