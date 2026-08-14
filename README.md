@@ -22,7 +22,7 @@ StopSlop builds on [Sloptrim](https://github.com/seyedehsanhadi/sloptrim), a loc
 
 **Version 2.0 is the end-user release target:** a ready-made Apple Silicon macOS `.dmg` published under GitHub Releases. The repository currently contains the product specification, desktop implementation, local analyzer sidecar build path, and DMG packaging configuration. The release artifact will require no cloud account, hosted API, database, or network connection for core analysis.
 
-When the first DMG is published, the direct download link will appear in the installation section below.
+The Version 2.0 DMG is available from the [latest GitHub Release](https://github.com/MrinalGitHub/StopSlop/releases/tag/v2.0.0).
 
 | Property | Version 2.0 target |
 |---|---|
@@ -45,7 +45,7 @@ The intended normal-user installation flow is:
 3. Launch StopSlop from Applications.
 4. Paste prose and choose **Analyse writing**.
 
-The Version 2.0 release will include the DMG, supported macOS architecture, checksum, release notes, and any Gatekeeper/signing instructions. Until the first DMG is published, developers can build it locally by following [`docs/release.md`](docs/release.md).
+The Version 2.0 release includes the Apple Silicon DMG, supported macOS architecture, checksum, release notes, and installation guidance. Developers can reproduce the build locally by following [`docs/release.md`](docs/release.md).
 
 The product preview above illustrates the intended StopSlop experience: local, private writing review with a clear score, metrics, findings, and revision-oriented workflow.
 
