@@ -3,21 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0f172a" />
+    <meta name="theme-color" content="#ffffff" />
     <title>StopSlop — Local writing-pattern review</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <div class="app-shell">
       <header class="topbar">
-        <div class="brand-lockup">
-          <img src="../../assets/kritrim-k-logo-transparent.png" alt="Kritrim-ai" class="brand-mark" />
-          <div>
-            <p class="eyebrow">Kritrim-ai</p>
-            <h1>StopSlop</h1>
-          </div>
+        <a class="brand-link" href="https://www.kritrim-ai.com/" title="Visit Kritrim-ai.com" aria-label="Visit Kritrim-ai.com">
+          <img src="./kritrim-k-logo-transparent.png" alt="Kritrim-ai logo" class="brand-mark" />
+          <span class="brand-name"><strong>Kritrim</strong><em>.ai</em></span>
+        </a>
+        <div class="product-lockup">
+          <p class="eyebrow">Local writing-pattern review</p>
+          <h1>StopSlop</h1>
         </div>
-        <div class="privacy-pill"><span class="status-dot"></span>Local analysis</div>
+        <div class="privacy-pill"><span class="status-dot"></span>Offline &amp; private</div>
       </header>
 
       <main class="content-grid">
@@ -29,14 +30,11 @@
             </div>
             <span id="word-count" class="muted">0 words</span>
           </div>
-
           <textarea id="prose" aria-label="Prose to review" placeholder="Paste a draft, article, proposal, or email here..."></textarea>
-
           <div class="editor-footer">
             <p class="privacy-note">Your prose stays on this Mac during analysis.</p>
             <p id="input-hint" class="muted">At least 20 characters</p>
           </div>
-
           <div class="action-row">
             <button id="analyse" class="primary-button" disabled>Analyse writing</button>
             <button id="clear" class="secondary-button">Clear</button>
@@ -46,6 +44,7 @@
 
         <section id="empty-state" class="empty-card card">
           <div class="empty-icon">S</div>
+          <p class="eyebrow">Ready when you are</p>
           <h2>Your review will appear here</h2>
           <p>StopSlop reports writing patterns that may read as formulaic or machine-like. It does not identify an author or prove AI use.</p>
         </section>
@@ -72,7 +71,7 @@
       </main>
 
       <footer class="footer">
-        <span>StopSlop by Kritrim-ai</span>
+        <span>StopSlop by <a href="https://www.kritrim-ai.com/">Kritrim-ai</a></span>
         <nav aria-label="Application information">
           <button data-info="privacy">Privacy</button>
           <button data-info="credits">Credits</button>

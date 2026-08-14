@@ -39,7 +39,8 @@ def main(argv: Optional[List[str]] = None) -> int:
     args = parser.parse_args(argv)
 
     try:
-        request = json.load(sys.stdin)
+        request_line = sys.stdin.readline()
+        request = json.loads(request_line)
     except (json.JSONDecodeError, OSError):
         response = {
             "ok": False,

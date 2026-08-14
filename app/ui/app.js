@@ -80,10 +80,17 @@ function showResult(result) {
 }
 
 async function requestAnalysis(text) {
-  if (window.__TAURI__ && window.__TAURI__.core) {
-    return window.__TAURI__.core.invoke('analyse_text', { text });
+  if (!(window.__TAURI__ && window.__TAURI__.core)) {
+    throw new Error('The desktop analysis bridge is not connected yet.');
   }
-  throw new Error('The desktop analysis bridge is not connected yet.');
+
+  const analysis = window.__TAURI__.core.invoke('analyse_text', { text });
+  const timeout = new Promise((_, reject) => {
+    window.setTimeout(() => {
+      reject(new Error('Local analysis timed out. Please try again.'));
+    }, 25000);
+  });
+  return Promise.race([analysis, timeout]);
 }
 
 prose.addEventListener('input', () => {
@@ -94,7 +101,7 @@ prose.addEventListener('input', () => {
 analyseButton.addEventListener('click', async () => {
   setError('');
   analyseButton.disabled = true;
-  analyseButton.textContent = 'Analysing locally...';
+  analyseButton.textContent = 'Reviewing locally...';
 
   try {
     const result = await requestAnalysis(prose.value);
