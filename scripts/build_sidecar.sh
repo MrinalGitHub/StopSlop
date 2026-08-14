@@ -9,13 +9,18 @@ if ! command -v python3 >/dev/null 2>&1; then
   exit 1
 fi
 
-if ! python3 -c 'import PyInstaller' >/dev/null 2>&1; then
-  echo "PyInstaller is required. Install it with: python3 -m pip install --user pyinstaller" >&2
+PYTHON_BIN="${PYTHON_BIN:-python3}"
+if [ -x "$ROOT_DIR/.venv/bin/python" ]; then
+  PYTHON_BIN="$ROOT_DIR/.venv/bin/python"
+fi
+
+if ! "$PYTHON_BIN" -c 'import PyInstaller' >/dev/null 2>&1; then
+  echo "PyInstaller is required. Install it in .venv with: python3 -m venv .venv && .venv/bin/python -m pip install pyinstaller" >&2
   exit 1
 fi
 
 TARGET_TRIPLE="$(rustc --print host-tuple)"
-python3 -m PyInstaller \
+"$PYTHON_BIN" -m PyInstaller \
   --noconfirm \
   --clean \
   --onefile \
