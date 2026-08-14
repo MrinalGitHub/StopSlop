@@ -128,6 +128,22 @@ def _normalise(raw: Dict[str, Any], engine_version: str) -> AnalysisResponse:
     )
 
 
+def _run_frozen_detector(detector_path: Path, text: str) -> Dict[str, Any]:
+    """Load the bundled detector directly when running as a frozen binary."""
+
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location("sloptrim_detect", detector_path)
+    if spec is None or spec.loader is None:
+        raise AnalysisError("detector_unavailable", "The bundled detector is unavailable.")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    result = module.scan(text)
+    if not isinstance(result, dict):
+        raise AnalysisError("detector_output_invalid", "The detector returned an unsupported result.")
+    return result
+
+
 def analyse_text(
     text: str,
     detector_path: Path,
@@ -143,6 +159,15 @@ def analyse_text(
         raise AnalysisError("invalid_input", "Please keep the text below 50,000 characters.")
     if not detector_path.is_file():
         raise AnalysisError("detector_unavailable", "The bundled detector is unavailable.")
+
+    if getattr(sys, "frozen", False):
+        try:
+            raw = _run_frozen_detector(detector_path, text)
+        except AnalysisError:
+            raise
+        except Exception as exc:
+            raise AnalysisError("analysis_failed", "The local analysis could not be completed.") from exc
+        return _normalise(raw, engine_version)
 
     executable = python_path or sys.executable
     temp_path = None
