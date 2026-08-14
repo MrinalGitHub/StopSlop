@@ -1,9 +1,13 @@
 # StopSlop
 
-
 <p align="center">
-  <img src="assets/stopslop-product-preview.png" alt="StopSlop product preview showing local writing review screens" width="720" />
+  <a href="https://www.kritrim-ai.com/" title="Visit Kritrim-ai.com">
+    <img src="assets/kritrim-k-logo-transparent.png" alt="Kritrim-ai logo" width="96" /><br />
+    <strong>Kritrim-ai.com</strong>
+  </a>
 </p>
+
+<p align="center"><strong>StopSlop by <a href="https://www.kritrim-ai.com/">Kritrim-ai</a></strong><br />Local writing-pattern review for macOS</p>
 
 <p align="center">
   <img src="assets/stopslop-product-preview.gif" alt="Animated StopSlop product preview" width="720" />
@@ -99,8 +103,3 @@ Contributions are welcome after the local contract and privacy requirements are 
 
 StopSlop project code is intended to be released under Apache License 2.0 unless the repository owner selects another compatible open-source licence before the first public release. Upstream Sloptrim materials remain subject to their original licence and notices.
 
-## References
-
-[1]: https://github.com/seyedehsanhadi/sloptrim "Sloptrim upstream repository"
-
-[2]: https://www.kritrim-ai.com/ "Kritrim-ai public website"
