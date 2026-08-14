@@ -45,6 +45,11 @@ textarea:focus { border-color: #fb923c; background: #ffffff; box-shadow: 0 0 0 4
 .editor-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 11px; }
 .editor-footer p { margin: 0; }
 .privacy-note { color: var(--green); font-size: 12px; font-weight: 700; }
+.capacity-block { margin-top: 14px; }
+.capacity-labels { display: flex; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 11px; font-weight: 750; }
+.capacity-track { height: 6px; margin-top: 8px; overflow: hidden; border-radius: 999px; background: #f3e8df; }
+.capacity-track span { display: block; width: 0; height: 100%; border-radius: inherit; background: var(--orange); transition: width 160ms ease, background 160ms ease; }
+.capacity-track span.over-limit { background: #dc2626; }
 .action-row { display: flex; gap: 10px; margin-top: 22px; }
 .primary-button, .secondary-button { border-radius: 12px; padding: 12px 18px; font-size: 14px; font-weight: 800; transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease, border-color 160ms ease; }
 .primary-button { border: 1px solid var(--orange-dark); background: var(--orange); color: #ffffff; box-shadow: 0 8px 20px rgba(234, 88, 12, 0.2); }
@@ -66,6 +71,14 @@ textarea:focus { border-color: #fb923c; background: #ffffff; box-shadow: 0 0 0 4
 .finding-top { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
 .finding-title { margin: 0; color: var(--ink); font-size: 14px; font-weight: 800; }
 .finding-message { margin: 8px 0 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
+.insights-card { grid-column: 1 / -1; padding: 24px; }
+.insights-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin-top: 18px; }
+.insight { min-height: 132px; border: 1px solid var(--line); border-radius: 15px; background: #fffaf5; padding: 14px; }
+.insight-positive { border-color: #bbf7d0; background: #f0fdf4; }
+.insight-attention { border-color: #fed7aa; background: #fff7ed; }
+.insight-label { margin: 0 0 8px; color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+.insight-value { display: block; color: var(--ink); font-size: 17px; letter-spacing: -.02em; }
+.insight-message { margin: 8px 0 0; color: var(--muted); font-size: 12px; line-height: 1.45; }
 .severity { border-radius: 999px; padding: 4px 8px; font-size: 10px; font-weight: 800; text-transform: uppercase; }
 .severity-high { background: #fee2e2; color: #991b1b; }
 .severity-medium { background: #ffedd5; color: #9a3412; }
@@ -77,5 +90,6 @@ textarea:focus { border-color: #fb923c; background: #ffffff; box-shadow: 0 0 0 4
 .footer button { border: 0; background: transparent; color: var(--muted); padding: 4px; font-size: 12px; }
 .footer button:hover { color: var(--orange-dark); }
 [hidden] { display: none !important; }
-@media (max-width: 860px) { .app-shell { padding: 22px 18px 18px; } .topbar { grid-template-columns: 1fr auto; gap: 15px; } .product-lockup { grid-column: 1 / -1; grid-row: 2; } .content-grid { grid-template-columns: 1fr; } .result-grid { grid-column: auto; grid-template-columns: 1fr; } .empty-card { min-height: 280px; } }
-@media (max-width: 520px) { .brand-mark { width: 48px; height: 48px; } .brand-name { font-size: 17px; } .privacy-pill { padding: 8px 10px; font-size: 11px; } .editor-card, .empty-card, .findings-card, .score-card { padding: 21px; } textarea { min-height: 270px; } .editor-footer, .footer { align-items: flex-start; flex-direction: column; } .action-row { flex-wrap: wrap; } }
+@media (max-width: 1000px) { .insights-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 860px) { .app-shell { padding: 22px 18px 18px; } .topbar { grid-template-columns: 1fr auto; gap: 15px; } .product-lockup { grid-column: 1 / -1; grid-row: 2; } .content-grid { grid-template-columns: 1fr; } .result-grid { grid-column: auto; grid-template-columns: 1fr; } .insights-card { grid-column: auto; } .insights-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .empty-card { min-height: 280px; } }
+@media (max-width: 520px) { .brand-mark { width: 48px; height: 48px; } .brand-name { font-size: 17px; } .privacy-pill { padding: 8px 10px; font-size: 11px; } .editor-card, .empty-card, .findings-card, .score-card, .insights-card { padding: 21px; } textarea { min-height: 270px; } .editor-footer, .capacity-labels, .footer { align-items: flex-start; flex-direction: column; } .insights-grid { grid-template-columns: 1fr; } .action-row { flex-wrap: wrap; } }

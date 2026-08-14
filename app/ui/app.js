@@ -12,8 +12,13 @@ const metrics = document.querySelector('#metrics');
 const summary = document.querySelector('#summary');
 const findingCount = document.querySelector('#finding-count');
 const findings = document.querySelector('#findings');
+const insights = document.querySelector('#insights');
+const capacityCount = document.querySelector('#capacity-count');
+const capacityRemaining = document.querySelector('#capacity-remaining');
+const capacityProgress = document.querySelector('#capacity-progress');
 
 const MIN_CHARS = 20;
+const MAX_WORDS = 8000;
 
 function getWordCount(value) {
   const trimmed = value.trim();
@@ -29,11 +34,20 @@ function updateEditorState() {
   const value = prose.value;
   const characterCount = value.trim().length;
   const words = getWordCount(value);
+  const remaining = Math.max(0, MAX_WORDS - words);
   wordCount.textContent = `${words} ${words === 1 ? 'word' : 'words'}`;
-  analyseButton.disabled = characterCount < MIN_CHARS;
+  capacityCount.textContent = `${words.toLocaleString()} / ${MAX_WORDS.toLocaleString()} words`;
+  capacityRemaining.textContent = words > MAX_WORDS
+    ? `${(words - MAX_WORDS).toLocaleString()} words over limit`
+    : `${remaining.toLocaleString()} words remaining`;
+  capacityProgress.style.width = `${Math.min(100, (words / MAX_WORDS) * 100)}%`;
+  capacityProgress.classList.toggle('over-limit', words > MAX_WORDS);
+  analyseButton.disabled = characterCount < MIN_CHARS || words > MAX_WORDS;
   inputHint.textContent = characterCount < MIN_CHARS
     ? `At least ${MIN_CHARS} characters`
-    : 'Ready for local analysis';
+    : words > MAX_WORDS
+      ? `Please shorten to ${MAX_WORDS.toLocaleString()} words or fewer`
+      : 'Ready for local analysis';
 }
 
 function showResult(result) {
@@ -45,6 +59,23 @@ function showResult(result) {
   summary.textContent = result.summary;
   findingCount.textContent = `${result.findings.length} ${result.findings.length === 1 ? 'finding' : 'findings'}`;
   findings.replaceChildren();
+  insights.replaceChildren();
+
+  (result.insights || []).forEach((item) => {
+    const article = document.createElement('article');
+    article.className = `insight insight-${item.tone || 'neutral'}`;
+    const label = document.createElement('p');
+    label.className = 'insight-label';
+    label.textContent = item.label;
+    const value = document.createElement('strong');
+    value.className = 'insight-value';
+    value.textContent = item.value;
+    const message = document.createElement('p');
+    message.className = 'insight-message';
+    message.textContent = item.message;
+    article.append(label, value, message);
+    insights.append(article);
+  });
 
   if (!result.findings.length) {
     const empty = document.createElement('p');
@@ -119,6 +150,7 @@ clearButton.addEventListener('click', () => {
   emptyState.hidden = false;
   resultState.hidden = true;
   findings.replaceChildren();
+  insights.replaceChildren();
   setError('');
   updateEditorState();
 });

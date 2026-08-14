@@ -19,6 +19,17 @@ class Finding:
 
 
 @dataclass
+class Insight:
+    """A plain-language text or metric signal shown separately from scored findings."""
+
+    id: str
+    label: str
+    value: str
+    message: str
+    tone: str = "neutral"
+
+
+@dataclass
 class AnalysisResponse:
     """The versioned response consumed by the desktop interface."""
 
@@ -28,6 +39,7 @@ class AnalysisResponse:
     summary: str
     metrics: Dict[str, Any]
     findings: List[Finding]
+    insights: List[Insight]
     engine: Dict[str, str]
     privacy: Dict[str, bool]
 

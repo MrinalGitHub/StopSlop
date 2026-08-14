@@ -35,6 +35,13 @@
             <p class="privacy-note">Your prose stays on this Mac during analysis.</p>
             <p id="input-hint" class="muted">At least 20 characters</p>
           </div>
+          <div class="capacity-block" aria-live="polite">
+            <div class="capacity-labels">
+              <span id="capacity-count">0 / 8,000 words</span>
+              <span id="capacity-remaining">8,000 words remaining</span>
+            </div>
+            <div class="capacity-track" aria-hidden="true"><span id="capacity-progress"></span></div>
+          </div>
           <div class="action-row">
             <button id="analyse" class="primary-button" disabled>Analyse writing</button>
             <button id="clear" class="secondary-button">Clear</button>
@@ -59,13 +66,23 @@
           <article class="findings-card card">
             <div class="section-heading">
               <div>
-                <p class="eyebrow">Explainable signals</p>
+                <p class="eyebrow">Scored signals</p>
                 <h2>Findings</h2>
               </div>
               <span id="finding-count" class="muted">0</span>
             </div>
             <p id="summary" class="summary"></p>
             <div id="findings" class="findings-list"></div>
+          </article>
+          <article class="insights-card card">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Text profile</p>
+                <h2>Explainable signals</h2>
+              </div>
+              <span class="muted">Not an authorship verdict</span>
+            </div>
+            <div id="insights" class="insights-grid"></div>
           </article>
         </section>
       </main>

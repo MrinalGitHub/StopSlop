@@ -11,6 +11,9 @@ async fn analyse_text(app: AppHandle, text: String) -> Result<Value, String> {
     if text.len() > 50000 {
         return Err("Please keep the text below 50,000 characters.".to_string());
     }
+    if text.split_whitespace().count() > 8000 {
+        return Err("Please keep the text below 8,000 words.".to_string());
+    }
 
     let request = serde_json::json!({
         "text": text,

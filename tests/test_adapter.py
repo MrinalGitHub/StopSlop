@@ -22,6 +22,9 @@ def test_normalizes_verified_sloptrim_shape():
     assert result.band == "mixed"
     assert result.findings[0].id == "40_sentence_monotony"
     assert result.findings[0].start is None
+    assert result.metrics["word_count"] > 0
+    assert result.insights[0].id == "text_shape"
+    assert any(item.id == "confidence" for item in result.insights)
     assert result.privacy["text_persisted"] is False
     assert result.privacy["network_required"] is False
 
@@ -31,6 +34,15 @@ def test_rejects_short_input():
         analyse_text("Too short", detector_path=FAKE_DETECTOR)
 
     assert error.value.code == "invalid_input"
+
+
+def test_rejects_word_limit():
+    text = ("word " * 8001).strip()
+    with pytest.raises(AnalysisError) as error:
+        analyse_text(text, detector_path=FAKE_DETECTOR)
+
+    assert error.value.code == "invalid_input"
+    assert "8,000 words" in error.value.message
 
 
 def test_rejects_missing_detector():

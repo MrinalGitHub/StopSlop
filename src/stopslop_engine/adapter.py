@@ -13,7 +13,7 @@ import tempfile
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from .contract import AnalysisResponse, Finding
+from .contract import AnalysisResponse, Finding, Insight
 
 
 class AnalysisError(RuntimeError):
@@ -90,7 +90,80 @@ def _normalise_finding(identifier: str, value: Any) -> Finding:
     )
 
 
-def _normalise(raw: Dict[str, Any], engine_version: str) -> AnalysisResponse:
+def _build_insights(raw_metrics: Dict[str, Any], text: str) -> List[Insight]:
+    """Create plain-language text metrics without changing the detector score."""
+
+    words = len(text.split())
+    characters = len(text)
+    paragraphs = max(1, len([item for item in text.split("\n\n") if item.strip()]))
+    sentences = raw_metrics.get("sentences")
+    if not isinstance(sentences, int):
+        sentences = 0
+    insights = [
+        Insight(
+            id="text_shape",
+            label="Text shape",
+            value="{} words".format(words),
+            message="{} characters across {} sentence(s) and {} paragraph(s).".format(characters, sentences, paragraphs),
+            tone="neutral",
+        )
+    ]
+
+    length_cv = raw_metrics.get("length_cv")
+    if isinstance(length_cv, (int, float)):
+        label = "Varied" if length_cv >= 0.35 else "Consistent"
+        tone = "positive" if length_cv >= 0.35 else "attention"
+        message = "Sentence-length variation is {:.2f}; higher variation usually reads as more natural.".format(length_cv)
+    else:
+        label = "Not enough text"
+        tone = "neutral"
+        message = "More sentences are needed to evaluate sentence-length variation."
+    insights.append(Insight("sentence_variety", "Sentence variety", label, message, tone))
+
+    passive_ratio = raw_metrics.get("passive_voice_ratio")
+    if isinstance(passive_ratio, (int, float)):
+        passive_percent = round(passive_ratio * 100)
+        tone = "attention" if passive_percent >= 25 else "neutral"
+        message = "Approximately {}% of detected clauses use passive voice.".format(passive_percent)
+        value = "{}% passive".format(passive_percent)
+    else:
+        tone = "neutral"
+        message = "Passive-voice estimation was not available for this text."
+        value = "Not available"
+    insights.append(Insight("voice", "Voice", value, message, tone))
+
+    readability_stdev = raw_metrics.get("readability_fk_stdev")
+    if isinstance(readability_stdev, (int, float)):
+        value = "{:.1f} spread".format(readability_stdev)
+        message = "Readability varies by {:.1f} grade-level points across sentences.".format(readability_stdev)
+        tone = "positive" if readability_stdev >= 1.0 else "attention"
+    else:
+        value = "Not available"
+        message = "More sentences are needed to compare readability across the text."
+        tone = "neutral"
+    insights.append(Insight("readability", "Readability", value, message, tone))
+
+    formatting_keys = ("invisible_chars", "nonstandard_spaces", "trailing_newlines", "eol_trailing_spaces", "leading_whitespace", "homoglyphs")
+    formatting_flags = sum(int(raw_metrics.get(key) or 0) for key in formatting_keys)
+    if formatting_flags:
+        format_value = "{} flag(s)".format(formatting_flags)
+        format_message = "Formatting or character-level anomalies were detected and should be reviewed."
+        format_tone = "attention"
+    else:
+        format_value = "Clean"
+        format_message = "No hidden characters, unusual spaces, or trailing formatting anomalies were detected."
+        format_tone = "positive"
+    insights.append(Insight("formatting", "Formatting", format_value, format_message, format_tone))
+
+    confidence = raw_metrics.get("confidence")
+    confidence_reason = raw_metrics.get("confidence_reason")
+    confidence_value = str(confidence or "none").replace("_", " ").title()
+    confidence_message = str(confidence_reason or "Confidence is limited for short text.")[:240]
+    insights.append(Insight("confidence", "Signal confidence", confidence_value, confidence_message, "neutral"))
+    return insights
+
+
+def _normalise(raw: Dict[str, Any], engine_version: str, text: str = "") -> AnalysisResponse:
     """Normalize the verified Sloptrim JSON structure."""
 
     raw_metrics = raw.get("_metrics")
@@ -109,7 +182,11 @@ def _normalise(raw: Dict[str, Any], engine_version: str) -> AnalysisResponse:
 
     findings.sort(key=lambda item: (item.severity != "high", item.severity != "medium", item.id))
     metrics = dict(raw_metrics)
+    metrics["word_count"] = len(text.split())
+    metrics["character_count"] = len(text)
+    metrics["paragraph_count"] = max(1, len([item for item in text.split("\n\n") if item.strip()]))
     metrics["finding_count"] = len(findings)
+    insights = _build_insights(raw_metrics, text)
 
     if findings:
         summary = "{} writing-pattern signal(s) were found for review.".format(len(findings))
@@ -123,6 +200,7 @@ def _normalise(raw: Dict[str, Any], engine_version: str) -> AnalysisResponse:
         summary=summary,
         metrics=metrics,
         findings=findings,
+        insights=insights,
         engine={"name": "sloptrim", "version": engine_version},
         privacy={"text_persisted": False, "network_required": False},
     )
@@ -157,6 +235,8 @@ def analyse_text(
         raise AnalysisError("invalid_input", "Please provide at least 20 characters of prose.")
     if len(text) > 50000:
         raise AnalysisError("invalid_input", "Please keep the text below 50,000 characters.")
+    if len(text.split()) > 8000:
+        raise AnalysisError("invalid_input", "Please keep the text below 8,000 words.")
     if not detector_path.is_file():
         raise AnalysisError("detector_unavailable", "The bundled detector is unavailable.")
 
@@ -167,7 +247,7 @@ def analyse_text(
             raise
         except Exception as exc:
             raise AnalysisError("analysis_failed", "The local analysis could not be completed.") from exc
-        return _normalise(raw, engine_version)
+        return _normalise(raw, engine_version, text)
 
     executable = python_path or sys.executable
     temp_path = None
@@ -214,4 +294,4 @@ def analyse_text(
     if not isinstance(raw, dict):
         raise AnalysisError("detector_output_invalid", "The detector returned an unsupported result.")
 
-    return _normalise(raw, engine_version)
+    return _normalise(raw, engine_version, text)
