@@ -1,12 +1,5 @@
 # StopSlop
 
-<p align="center">
-  <a href="https://www.kritrim-ai.com/">
-    <img src="assets/kritrim-k-logo-transparent.png" alt="Kritrim-ai logo" width="96" />
-  </a>
-</p>
-
-<p align="center"><strong>StopSlop by Kritrim-ai</strong><br />Local writing-pattern review for macOS</p>
 
 <p align="center">
   <img src="assets/stopslop-product-preview.png" alt="StopSlop product preview showing local writing review screens" width="720" />
