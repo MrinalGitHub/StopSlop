@@ -24,11 +24,11 @@ StopSlop builds on [Sloptrim](https://github.com/seyedehsanhadi/sloptrim), a loc
 
 ## Product status
 
-**Version 2.0.1 is the corrected end-user release target:** a ready-made Apple Silicon macOS `.dmg` published under GitHub Releases. The repository currently contains the product specification, desktop implementation, local analyzer sidecar build path, and DMG packaging configuration. The release artifact will require no cloud account, hosted API, database, or network connection for core analysis.
+**Version 2.0.2 is the enriched end-user release target:** a ready-made Apple Silicon macOS `.dmg` published under GitHub Releases. The repository currently contains the product specification, desktop implementation, local analyzer sidecar build path, and DMG packaging configuration. The release artifact will require no cloud account, hosted API, database, or network connection for core analysis.
 
-The Version 2.0.1 DMG is available from the [latest GitHub Release](https://github.com/MrinalGitHub/StopSlop/releases/tag/v2.0.1).
+The Version 2.0.2 DMG is available from the [latest GitHub Release](https://github.com/MrinalGitHub/StopSlop/releases/tag/v2.0.2).
 
-| Property | Version 2.0.1 target |
+| Property | Version 2.0.2 target |
 |---|---|
 | Product type | Native-feeling local macOS desktop application |
 | Distribution | Downloadable `.dmg` from GitHub Releases |
@@ -49,7 +49,7 @@ The intended normal-user installation flow is:
 3. Launch StopSlop from Applications.
 4. Paste prose and choose **Analyse writing**.
 
-The Version 2.0.1 release includes the Apple Silicon DMG, corrected local analysis execution, the white-and-orange interface, supported macOS architecture, checksum, release notes, and installation guidance. Developers can reproduce the build locally by following [`docs/release.md`](docs/release.md).
+The Version 2.0.2 release includes richer explainable signals, a visible 8,000-word capacity meter, corrected local analysis execution, the white-and-orange interface, supported macOS architecture, checksum, release notes, and installation guidance. Developers can reproduce the build locally by following [`docs/release.md`](docs/release.md).
 
 The product preview above illustrates the intended StopSlop experience: local, private writing review with a clear score, metrics, findings, and revision-oriented workflow.
 
