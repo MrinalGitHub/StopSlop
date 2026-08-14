@@ -43,6 +43,8 @@ The Version 2.0.2 test DMG is available from the [pre-release GitHub page](https
 
 The free installation flow is:
 
+> **Certificate note:** This free build is unsigned and not notarized by Apple. Verify the SHA-256 checksum, then use the one-time macOS **Open** approval if prompted before launching.
+
 1. Download the **StopSlop 2.0.2 Apple Silicon DMG** from the [GitHub pre-release page](https://github.com/MrinalGitHub/StopSlop/releases/tag/v2.0.2).
 2. Download the matching `.sha256` file and verify the DMG before opening it:
 
@@ -63,7 +65,7 @@ The free installation flow is:
 
 6. Paste prose and choose **Analyse writing**.
 
-This free release includes richer explainable signals, a visible 8,000-word capacity meter, corrected local analysis execution, the white-and-orange interface, native icon, and Apple Silicon support. It does not require an Apple Developer membership, cloud account, hosted API, database, or internet connection for core analysis. Developers can reproduce the build locally by following [`docs/release.md`](docs/release.md).
+This free release includes richer explainable signals, a visible 8,000-word capacity meter, corrected local analysis execution, a native icon, and Apple Silicon support. It does not require an Apple Developer membership, cloud account, hosted API, database, or internet connection for core analysis. Developers can reproduce the build locally by following [`docs/release.md`](docs/release.md).
 
 The product preview above illustrates the intended StopSlop experience: local, private writing review with a clear score, metrics, findings, and revision-oriented workflow.
 
