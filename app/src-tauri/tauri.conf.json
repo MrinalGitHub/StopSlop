@@ -29,6 +29,7 @@
   "bundle": {
     "active": true,
     "targets": ["dmg"],
+    "icon": ["icons/icon.icns", "icons/icon.png"],
     "externalBin": ["binaries/stopslop-analyse"],
     "shortDescription": "Local writing-pattern review",
     "longDescription": "StopSlop reviews writing patterns locally on your Mac. It does not identify authorship or prove AI use.",
