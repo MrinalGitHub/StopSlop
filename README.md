@@ -8,6 +8,10 @@
 
 <p align="center"><strong>StopSlop by Kritrim-ai</strong><br />Local writing-pattern review for macOS</p>
 
+<p align="center">
+  <img src="assets/stopslop-product-preview.png" alt="StopSlop product preview showing local writing review screens" width="720" />
+</p>
+
 **StopSlop** is a privacy-first writing-pattern review application for macOS. It runs locally on the user’s Mac, analyzes prose without sending text to a server, and presents a score, severity band, metrics, and named writing-pattern findings.
 
 StopSlop builds on [Sloptrim](https://github.com/seyedehsanhadi/sloptrim), a local detector for AI-writing patterns. StopSlop adds a polished desktop interface, local application packaging, accessibility-minded result presentation, and a downloadable macOS DMG.
@@ -42,6 +46,8 @@ The intended normal-user installation flow is:
 4. Paste prose and choose **Analyse writing**.
 
 The Version 2.0 release will include the DMG, supported macOS architecture, checksum, release notes, and any Gatekeeper/signing instructions. Until the first DMG is published, developers can build it locally by following [`docs/release.md`](docs/release.md).
+
+The product preview above illustrates the intended StopSlop experience: local, private writing review with a clear score, metrics, findings, and revision-oriented workflow.
 
 ## Planned user flow
 
