@@ -14,6 +14,8 @@ if ! command -v cargo >/dev/null 2>&1; then
   exit 1
 fi
 
+cd "$ROOT_DIR"
+./scripts/build_sidecar.sh
 cd "$APP_DIR"
 npm install --no-audit --no-fund
 npm run tauri build -- --bundles dmg

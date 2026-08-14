@@ -10,6 +10,7 @@
     "frontendDist": "../dist"
   },
   "app": {
+    "withGlobalTauri": true,
     "windows": [
       {
         "title": "StopSlop — Local writing-pattern review",
@@ -28,6 +29,7 @@
   "bundle": {
     "active": true,
     "targets": ["dmg"],
+    "externalBin": ["binaries/stopslop-analyse"],
     "shortDescription": "Local writing-pattern review",
     "longDescription": "StopSlop reviews writing patterns locally on your Mac. It does not identify authorship or prove AI use.",
     "category": "Utility",

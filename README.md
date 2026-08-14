@@ -1,5 +1,13 @@
 # StopSlop
 
+<p align="center">
+  <a href="https://www.kritrim-ai.com/">
+    <img src="assets/kritrim-k-logo-transparent.png" alt="Kritrim-ai logo" width="96" />
+  </a>
+</p>
+
+<p align="center"><strong>StopSlop by Kritrim-ai</strong><br />Local writing-pattern review for macOS</p>
+
 **StopSlop** is a privacy-first writing-pattern review application for macOS. It runs locally on the user’s Mac, analyzes prose without sending text to a server, and presents a score, severity band, metrics, and named writing-pattern findings.
 
 StopSlop builds on [Sloptrim](https://github.com/seyedehsanhadi/sloptrim), a local detector for AI-writing patterns. StopSlop adds a polished desktop interface, local application packaging, accessibility-minded result presentation, and a downloadable macOS DMG.
@@ -8,9 +16,11 @@ StopSlop builds on [Sloptrim](https://github.com/seyedehsanhadi/sloptrim), a loc
 
 ## Product status
 
-The repository currently contains the product specification and implementation foundation. The first release target is an **Apple Silicon macOS DMG** with no cloud account, no hosted API, no database, and no network requirement for analysis.
+**Version 2.0 is the end-user release target:** a ready-made Apple Silicon macOS `.dmg` published under GitHub Releases. The repository currently contains the product specification, desktop implementation, local analyzer sidecar build path, and DMG packaging configuration. The release artifact will require no cloud account, hosted API, database, or network connection for core analysis.
 
-| Property | Version 1 target |
+When the first DMG is published, the direct download link will appear in the installation section below.
+
+| Property | Version 2.0 target |
 |---|---|
 | Product type | Native-feeling local macOS desktop application |
 | Distribution | Downloadable `.dmg` from GitHub Releases |
@@ -21,6 +31,17 @@ The repository currently contains the product specification and implementation f
 | Cloud dependency | None |
 | Accounts | None |
 | Upstream engine | Pinned and attributed Sloptrim source |
+
+## Installation
+
+The intended normal-user installation flow is:
+
+1. Download the latest **StopSlop `.dmg`** from the [GitHub Releases page](https://github.com/MrinalGitHub/StopSlop/releases).
+2. Open the DMG and drag StopSlop into the Applications folder.
+3. Launch StopSlop from Applications.
+4. Paste prose and choose **Analyse writing**.
+
+The Version 2.0 release will include the DMG, supported macOS architecture, checksum, release notes, and any Gatekeeper/signing instructions. Until the first DMG is published, developers can build it locally by following [`docs/release.md`](docs/release.md).
 
 ## Planned user flow
 

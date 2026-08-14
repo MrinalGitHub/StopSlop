@@ -9,8 +9,17 @@ from typing import List, Optional
 from .adapter import AnalysisError, analyse_text
 
 
+def bundled_root() -> Path:
+    """Return the source root or the PyInstaller extraction root."""
+
+    frozen_root = getattr(sys, "_MEIPASS", None)
+    if frozen_root:
+        return Path(frozen_root)
+    return Path(__file__).resolve().parents[2]
+
+
 DEFAULT_DETECTOR = (
-    Path(__file__).resolve().parents[2]
+    bundled_root()
     / "vendor"
     / "sloptrim"
     / "scripts"
